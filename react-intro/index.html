@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Persona({id, name, age}) {
+          return <h2>[{id}] - {name} - {age}</h2>;
+      }
+
+      function ListaDePersona() {
+        const init = [
+          {id:1, name: 'Juan', age: 20},
+          {id:2, name: 'Pedro', age: 30},
+          {id:3, name: 'Maria', age: 40}
+        ];
+
+        const [personas, setPersonas] = React.useState(init);
+
+        function agregarPersona(){
+          console.log("Agregar Persona");
+          setPersonas([...personas, {id:personas.length+1, name: 'Nueva Persona', age: 50}]);
+        }
+
+        return <div>
+          {personas.map(p => <Persona key={p.id} {...p} />)}
+          <button onClick={agregarPersona}>Agregar Persona</button>
+          </div>;
+      }
+
+      ReactDOM.render(<ListaDePersona />, document.getElementById('root'));
+
+    </script>
+
+  </body>
+</html>
